@@ -359,6 +359,11 @@ async function startBot() {
                         messageText.toLowerCase().includes('/adicionaradmin') ||
                         messageText.toLowerCase().includes('/removeradmin') ||
                         messageText.toLowerCase().includes('/listaradmins') ||
+                        messageText.toLowerCase().includes('/bloqueartermo') ||
+                        messageText.toLowerCase().includes('/bloquearlink') ||
+                        messageText.toLowerCase().includes('/removertermo') ||
+                        messageText.toLowerCase().includes('/removerlink') ||
+                        messageText.toLowerCase().includes('/listatermos') ||
                         messageText.toLowerCase().includes('/comandos')
                     );
                     

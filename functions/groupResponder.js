@@ -147,7 +147,7 @@ export async function handleGroupMessages(sock, message) {
 
 
 
-    // Comandos /fechar, /abrir, /fixar, /regras, /status, /banir, /bloqueartermo, /bloquearlink, /removertermo, /removerlink, /listatermos, /comandos, /adicionargrupo, /removergrupo, /listargrupos, /adicionaradmin, /removeradmin, /listaradmins
+    // Comandos administrativos e informativos
     if (text.toLowerCase().includes('/fechar') || text.toLowerCase().includes('/abrir') || text.toLowerCase().includes('/fixar') || text.toLowerCase().includes('/regras') || text.toLowerCase().includes('/status') || text.toLowerCase().includes('/banir') || text.toLowerCase().includes('/bloqueartermo') || text.toLowerCase().includes('/bloquearlink') || text.toLowerCase().includes('/removertermo') || text.toLowerCase().includes('/removerlink') || text.toLowerCase().includes('/listatermos') || text.toLowerCase().includes('/comandos') || text.toLowerCase().includes('/adicionargrupo') || text.toLowerCase().includes('/removergrupo') || text.toLowerCase().includes('/listargrupos') || text.toLowerCase().includes('/adicionaradmin') || text.toLowerCase().includes('/removeradmin') || text.toLowerCase().includes('/listaradmins')) {
         try {
             // Lista de comandos que requerem autorização de admin
@@ -166,9 +166,8 @@ export async function handleGroupMessages(sock, message) {
             if (requiresAuth) {
                 const authorized = await isAuthorized(senderId);
                 if (!authorized) {
-                    await sock.sendMessage(groupId, { 
-                        text: '❌ *Acesso Negado*\n\n⚠️ Você não tem permissão para usar este comando.\n\n🔐 Apenas administradores do bot podem executar comandos administrativos.\n\n💡 Entre em contato com um administrador para obter acesso.' 
-                    });
+                    const responseMsg = '❌ *Acesso Negado*\n\n⚠️ Você não tem permissão para usar este comando.\n\n🔐 Apenas administradores do bot podem executar comandos administrativos.\n\n💡 Entre em contato com um administrador para obter acesso.';
+                    await sock.sendMessage(chatId, { text: responseMsg });
                     console.log(`🚫 Comando administrativo bloqueado para usuário não autorizado: ${senderId}`);
                     return;
                 }
