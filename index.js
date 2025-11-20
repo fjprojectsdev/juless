@@ -349,9 +349,28 @@ async function startBot() {
                     continue;
                 }
 
-                // Restringir respostas em privados para IDs autorizados/permitidos
-                    if (!isGroup) {
-                    if (allowedUsersCache.size > 0 && !allowedUsersCache.has(senderId) && !(await isAuthorized(senderId))) {
+                // Permitir comandos administrativos no PV para admins autorizados
+                if (!isGroup) {
+                    const isAdmin = await isAuthorized(senderId);
+                    const isAdminCommand = messageText && typeof messageText === 'string' && (
+                        messageText.toLowerCase().includes('/adicionargrupo') ||
+                        messageText.toLowerCase().includes('/removergrupo') ||
+                        messageText.toLowerCase().includes('/listargrupos') ||
+                        messageText.toLowerCase().includes('/adicionaradmin') ||
+                        messageText.toLowerCase().includes('/removeradmin') ||
+                        messageText.toLowerCase().includes('/listaradmins') ||
+                        messageText.toLowerCase().includes('/comandos')
+                    );
+                    
+                    // Se for admin e comando administrativo, processar
+                    if (isAdmin && isAdminCommand) {
+                        console.log('⚙️ Comando administrativo no PV detectado');
+                        await handleGroupMessages(sock, message);
+                        continue;
+                    }
+                    
+                    // Caso contrário, aplicar restrições normais de PV
+                    if (allowedUsersCache.size > 0 && !allowedUsersCache.has(senderId) && !isAdmin) {
                         console.log('⏭️ PV não autorizado — ignorando:', senderId);
                         continue;
                     }

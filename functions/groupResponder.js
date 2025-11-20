@@ -19,6 +19,7 @@ export async function handleGroupMessages(sock, message) {
     const groupId = message.key.remoteJid;
     const isGroup = groupId.endsWith('@g.us');
     const senderId = message.key.participant || message.key.remoteJid;
+    const chatId = isGroup ? groupId : senderId; // Para PV, usar senderId como chatId
 
     const contentType = Object.keys(message.message)[0];
     let text = '';
@@ -459,10 +460,12 @@ _Esta notificação foi enviada automaticamente aos administradores._
 
                     const result = await addAllowedGroup(senderId, param);
                     if (result.success) {
-                        // enviar confirmação privada ao remetente
+                        // enviar confirmação ao remetente
                         await sock.sendMessage(senderId, { text: result.message });
-                        // avisar no grupo que a operação foi concluída (sem expor quem executou)
-                        await sock.sendMessage(groupId, { text: `✅ O grupo foi adicionado à lista de funcionamento do bot.` });
+                        // Se estiver no grupo, avisar também no grupo
+                        if (isGroup) {
+                            await sock.sendMessage(groupId, { text: `✅ O grupo foi adicionado à lista de funcionamento do bot.` });
+                        }
                     } else {
                         // enviar erro/aviso ao remetente
                         await sock.sendMessage(senderId, { text: result.message });
