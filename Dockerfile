@@ -1,5 +1,5 @@
-# Use Node.js 18 Alpine para imagem menor
-FROM node:18-alpine
+# Use Node.js 20 Alpine para compatibilidade com Baileys
+FROM node:20-alpine
 
 # Instalar dependências do sistema
 RUN apk add --no-cache \
