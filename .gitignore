@@ -1,0 +1,10 @@
+node_modules/
+auth_info/
+.env
+bot_memory.json
+allowed_groups.json
+allowed_users.json
+blacklist.json
+admins.json
+*.log
+.DS_Store

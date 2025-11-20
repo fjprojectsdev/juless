@@ -1,0 +1,57 @@
+{
+  "name": "imavybot",
+  "version": "1.0.0",
+  "description": "Bot avançado para WhatsApp com IA integrada, sistema anti-spam e gerenciamento de grupos",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node watcher.js",
+    "setup": "node setup.js",
+    "test-config": "node test-config.js",
+    "config": "node test-config.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "echo \"Linting not configured\"",
+    "docker:build": "docker build -t imavybot .",
+    "docker:run": "docker-compose up -d",
+    "docker:stop": "docker-compose down",
+    "docker:logs": "docker-compose logs -f"
+  },
+  "dependencies": {
+    "@whiskeysockets/baileys": "^6.7.21",
+    "dotenv": "^16.6.1",
+    "node-cron": "^3.0.3",
+    "node-fetch": "^3.3.2",
+    "qrcode": "^1.5.4",
+    "qrcode-terminal": "^0.12.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  },
+  "keywords": [
+    "whatsapp",
+    "bot",
+    "chatbot",
+    "ai",
+    "groq",
+    "openrouter",
+    "anti-spam",
+    "group-management",
+    "baileys",
+    "nodejs"
+  ],
+  "author": "iMavyBot Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/seu-usuario/imavybot.git"
+  },
+  "bugs": {
+    "url": "https://github.com/seu-usuario/imavybot/issues"
+  },
+  "homepage": "https://github.com/seu-usuario/imavybot#readme",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  }
+}
